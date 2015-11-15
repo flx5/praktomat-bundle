@@ -30,7 +30,7 @@ fi
 
 function warning {
    echo -e "\e[1m\e[31m"
-   echo $1;
+   echo "WARNING: $1";
    echo -e "\e[0m"
 }
 
@@ -50,7 +50,7 @@ while read file; do
 done < <(find $wd -name $entryfile -print -quit)
 
 if [ "$entry_found" = false ]; then
-   warning "WARNING: Could not find entry file $entryfile";
+   warning "Could not find entry file $entryfile";
 fi
 
 find $wd -type f -name "*.java" -or -name "*.txt" | while read file; do 
@@ -59,6 +59,11 @@ find $wd -type f -name "*.java" -or -name "*.txt" | while read file; do
     fi
     tar rf $outfile -C $(dirname $file) $(basename $file)
 done
+
+if [ ! -f $outfile ]; then
+    warning "Outfile was not created. Probably no source files found?"
+    exit 1
+fi
 
 echo "The created archive contains the following files:"
 echo "#################################################"

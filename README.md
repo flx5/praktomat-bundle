@@ -1,4 +1,4 @@
-# Pratkomat Bundle Script
+# Praktomat Bundle Script
 
 This script will create a tar archive containing the java source files and any text files within the project folder.
 

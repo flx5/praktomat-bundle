@@ -5,7 +5,7 @@ This script will create a tar archive containing the java source files and any t
 Downloads
 --------
 [The current version can be found 
-here](https://github.com/flx5/praktomat-bundle/releases)
+here](https://github.com/flx5/praktomat-bundle/releases/latest)
 
 Usage
 -----------

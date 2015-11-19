@@ -2,6 +2,11 @@
 
 This script will create a tar archive containing the java source files and any text files within the project folder.
 
+Downloads
+--------
+[The current version can be found 
+here](https://github.com/flx5/praktomat-bundle/releases)
+
 Usage
 -----------
 

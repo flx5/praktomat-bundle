@@ -20,6 +20,8 @@
 #
 ######################################################
 
+set -e 
+
 wd=$(pwd)
 
 if [ -z "$1" ]; then
@@ -34,6 +36,19 @@ function warning {
    echo -e "\e[0m"
 }
 
+function error {
+   echo -e "\e[1m\e[31m"
+   echo "ERROR: $1";
+   echo -e "\e[0m"
+   exit 1
+}
+
+function checkTabs {
+      if  grep -q -P '\t' $1; then
+          error "File $1 contains Tabs"
+      fi
+}
+
 outfile=$wd/bundle.tar;
 
 echo "Creating tar archive at $outfile"
@@ -45,6 +60,7 @@ fi
 entry_found=false
 
 while read file; do
+   checkTabs $file
    tar rf $outfile -C $(dirname $file) $(basename $file)
    entry_found=true
 done < <(find $wd -name $entryfile -print -quit)
@@ -57,6 +73,8 @@ find $wd -type f -name "*.java" -or -name "*.txt" | while read file; do
     if [ $(basename $file) == $entryfile ]; then
        continue;
     fi
+    
+    checkTabs $file
     tar rf $outfile -C $(dirname $file) $(basename $file)
 done
 
